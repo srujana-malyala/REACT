@@ -1,0 +1,87 @@
+.featuredproducts {
+    background-color: black;
+    color: white;
+    padding: 60px 40px 80px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.products {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.card {
+    height:10px;
+    width:300px;
+    color: #d6deea;
+    text-align: center;
+    transition:
+        transform 0.45s ease,
+        opacity 0.45s ease;
+    position: relative;
+    z-index: 2;
+}
+.price{
+    color:white;
+    font-weight: bold;
+}
+
+/* ⚡ ADJACENT PRODUCTS */
+.slick-active:not(.slick-center) .card {
+  transform: scale(0.95);
+  opacity: 0.85;
+}
+
+/* 💧 OUTER PRODUCTS */
+.slick-slide:not(.slick-active) .card {
+  transform: scale(0.75);
+  opacity: 0.9;
+}
+
+/* IMAGE */
+.card img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin: auto;
+}
+
+/* PRICE */
+.price span {
+  text-decoration: line-through;
+  color: #888;
+  margin-left: 8px;
+}
+
+
+
+/* 🔥 CENTER PRODUCT – COMES FORWARD */
+.slick-center .card {
+  transform: scale(1.3) translateY(-15px);
+  z-index: 10;
+  opacity: 1;
+}
+
+
+/* DOTS */
+.slick-dots {
+  bottom: -40px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #777;
+  opacity: 1;
+}
+
+.slick-dots li.slick-active button:before,
+.slick-dots li:hover button:before {
+  color: red;
+}
