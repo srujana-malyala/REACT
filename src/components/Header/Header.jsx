@@ -1,0 +1,38 @@
+import { FaShoppingCart } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+import { AiOutlineUser } from "react-icons/ai";
+import { useState } from "react";
+
+import { Link } from "react-router-dom";
+export const Header = () => {
+    const [showInput, setShowInput] = useState(false);
+    return (
+        <>
+            <nav className="nav-container">
+                <div className="navv"><h1>Tech-Shop</h1></div>
+
+                <div className="nav-link" style={{ marginLeft:"auto" }} >
+
+                    {showInput && (
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            style={{ padding: "10px" ,width:"500px",backgroundColor:"grey"
+                                , color:"whitesmoke",border:"1px solid",borderColor:"black",alignItems:"center",
+                                textAlign:"center" }}
+                        />
+                    )}
+
+                    <FaSearch
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setShowInput(!showInput)}
+                    />
+
+                    <Link className="nav-link"> <FaShoppingCart /></Link>
+                    <Link className="nav-link"><AiOutlineUser /></Link>
+                </div>
+
+            </nav>
+        </>
+    )
+}
