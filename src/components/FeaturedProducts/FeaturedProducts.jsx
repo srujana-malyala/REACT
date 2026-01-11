@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 //import images from"../public/products/Images"
 
-const FeaturedProducts = () => {
+export const FeaturedProducts = () => {
     const filteredProduct = productsData.filter(
         (product) => product.tag === "featured-product"
     );
