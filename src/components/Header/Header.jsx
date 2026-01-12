@@ -21,8 +21,8 @@ export const Header = () => {
                             type="text"
                             placeholder="Search..."
                             style={{
-                                padding: "10px", width: "500px", backgroundColor: "grey"
-                                , color: "whitesmoke", border: "1px solid", borderColor: "black", alignItems: "center",
+                                padding: "10px", width: "500px", backgroundColor: "#0f0f0f"
+                                , color: "white", border: "1px solid", borderColor: "black", alignItems: "center",
                                 textAlign: "center"
                             }}
                         />

@@ -1,7 +1,7 @@
 
 .top{
      background: #111;
- height: 1600px;
+ height: 1700px;
  width: 1500px;
   color: #ccc;
 }
@@ -15,25 +15,33 @@
 }
 
 
-.links ul{
+.category-list {
   display: flex;
-   margin-left: 400px;
-   gap:50px
-}
-
-.links ul li{
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0 50px;
   list-style: none;
-   
-
+  padding: 0;
 }
 
-.links ul li .link{
-  text-decoration: none;
-   margin-right:10px;
-   color: white;
-   cursor: pointer;  
-
+.category-list li {
+  color: #aaa;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: 6px;
+  transition: 0.3s;
 }
+
+.category-list li:hover {
+  color: #fff;
+}
+
+.category-list li.active {
+  background: #ff0000;
+  color: #fff;
+}
+
 
 .link:hover{
   background-color: orangered;
@@ -162,7 +170,7 @@
 }
 
 .browse-card span {
-  color:white;
+  color:grey;
   font-size: 18px;
   font-weight: 600;
   text-align: center;
