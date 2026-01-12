@@ -11,3 +11,30 @@
   color: #bfc7d5;
   margin-bottom: 60px;
 }
+
+
+.links ul{
+  display: flex;
+   margin-left: 400px;
+   gap:50px
+}
+
+.links ul li{
+  list-style: none;
+   
+
+}
+
+.links ul li .link{
+  text-decoration: none;
+   margin-right:10px;
+   color: white;
+   cursor: pointer;  
+
+}
+
+.link:hover{
+  background-color: orangered;
+  border-radius: 10px;
+  padding:17px;
+}

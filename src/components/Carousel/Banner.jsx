@@ -7,7 +7,7 @@ import "./Banner.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const Banner = () => {
+ export const Banner = () => {
   const heroProducts = productsData.filter(
     (product) => product.tag === "hero-product"
   );

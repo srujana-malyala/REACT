@@ -9,12 +9,13 @@ import { TopProducts } from "../components/TopProducts/TopProducts"
 export const Mainlayout =()=>{
     return(
         <>
-        <Header/>
+        <AppRouter/>
+        {/* <Header/>
         <Banner/>
         <FeaturedProducts/>
         <TopProducts/>
         <Service/>
-        <Footer/>
+        <Footer/> */}
         </>
     )
 }
