@@ -1,0 +1,135 @@
+
+
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal Box */
+.login-modal {
+  width: 350px;
+  background: linear-gradient(180deg, #1b1b1b, #0f0f0f);
+  padding: 30px;
+  border-radius: 12px;
+  color: #fff;
+  position: relative;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #aaa;
+}
+
+/* Heading */
+.login-modal h2 {
+  margin-bottom: 8px;
+  font-size: 22px;
+}
+
+/* Switch text */
+.switch-text {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.switch-text span {
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Inputs */
+.login-modal input {
+  width: 90%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #444;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  color: #fff;
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #e10600;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* Divider */
+.divider-text {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.divider-text span {
+  background: #0f0f0f;
+  padding: 0 10px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.divider-text::before,
+.divider-text::after {
+  content: "";
+  height: 1px;
+  width: 35%;
+  background: #333;
+  position: absolute;
+  top: 50%;
+}
+
+.divider-text::before {
+  left: 0;
+}
+
+.divider-text::after {
+  right: 0;
+}
+
+/* Social Buttons */
+.social-login {
+  display: flex;
+  gap: 10px;
+}
+
+.social-login button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.fb {
+  background: #3b5998;
+}
+
+.google {
+  background: #db4437;
+}
+
+.twitter {
+  background: #1da1f2;
+}
