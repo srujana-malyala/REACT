@@ -3,11 +3,14 @@ import "./TopProducts.css"
 import { MdOutlineStar } from "react-icons/md";
 import { Link } from "react-router-dom"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Ratecount } from "../ProductDetails/Ratecount";
+
 
 export const TopProducts = () => {
 
 
-     const [activeCategory, setActiveCategory] = useState("all");
+    const [activeCategory, setActiveCategory] = useState(""); 
 
   // 🔹 FILTER 
   const filteredProducts = () => {
@@ -19,6 +22,13 @@ export const TopProducts = () => {
     );
   };
 
+  //NAVIGATE
+  const navigate = useNavigate();
+      
+        const handleSelect = (id) => {
+          navigate(`/product/${id}`);
+        };
+  
     return (
         <>
             <div className="top">
@@ -71,8 +81,9 @@ export const TopProducts = () => {
                     <div className="cards">
                         {filteredProducts().map((products) => (
                             <div className="card-link" key={products.id}>
-                                <img src={products.images[0]} />
-                                <div className="card-rate">{products.rateCount}<  MdOutlineStar /></div>
+                                <img src={products.images[0]} onClick={() => handleSelect(products.id)} />
+                                {/* <div className="card-rate"><  MdOutlineStar/>{products.rateCount}</div> */}
+                                <Ratecount rateCount={products.rateCount}/>
 
                                 <h1 className="card-title">{products.title}</h1>
                                 <p>{products.info}</p>

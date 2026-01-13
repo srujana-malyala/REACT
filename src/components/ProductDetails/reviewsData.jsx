@@ -1,4 +1,4 @@
-const reviewsData = [
+export const reviewsData = [
     {
         id: 1,
         name: "Atharva Kumar",
@@ -36,4 +36,3 @@ const reviewsData = [
     },
 ]
 
-export default reviewsData;
