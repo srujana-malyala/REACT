@@ -6,11 +6,16 @@ import { useNavigate, Link } from "react-router-dom";
 import { Login } from "./Login";
 import productsData from "../Products/productsData";
 import "./Header.css";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState("");
   const [showAuth, setShowAuth] = useState(false);
+
+  const count = useSelector((state) =>
+      state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
+    );
 
   const navigate = useNavigate();
 
@@ -70,8 +75,11 @@ export const Header = () => {
             </div>
           )}
 
-          <Link className="nav-link">
-            <FaShoppingCart />
+          <Link className="nav-link" to="/cart">
+            <FaShoppingCart />  
+            {count > 0 && (
+    <sup className="cart-count" style={{color:"white",backgroundColor:"orangered" ,paading:"10px" }}>{count}</sup>
+  )} 
           </Link>
 
           <AiOutlineUser

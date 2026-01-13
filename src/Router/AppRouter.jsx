@@ -3,7 +3,7 @@ import { Route } from "react-router-dom"
 import {Home} from "../Pages/Home"
 import { Browse } from "../components/Browse/Browse"
 import { ProductDetails } from "../components/ProductDetails/ProductDetails"
-import { SingleProduct } from "../components/Products/SingleProduct"
+import  Cart  from "../Pages/Cart"
 export const AppRouter = ()=>{
     return(
         <>
@@ -11,7 +11,7 @@ export const AppRouter = ()=>{
         <Route path="/" element={<Home/>}/>
          <Route path="/products" element={<Browse />} />
           <Route path="/product/:id" element={<ProductDetails />} />
-           <Route path="/products/:id" element={<SingleProduct />} />
+          <Route path="/cart" element={<Cart />} />
        </Routes>
         </>
     )

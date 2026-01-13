@@ -9,9 +9,13 @@ import { Header } from "../Header/Header"
 import Service from "../Services/Service";
 import { reviewsData } from "../ProductDetails/reviewsData"
 
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Cart/CartSlice";
+
 export const ProductDetails = () => {
 
   const [activeTab, setActiveTab] = useState("overview");
+   const dispatch = useDispatch();
   //PRODUCTS DISPLAY
   const { id } = useParams();
   const product = productsData.find(
@@ -87,7 +91,7 @@ export const ProductDetails = () => {
             <button>Pay Later & Avail Cashback</button>
           </div>
           <div className="divider"></div>
-          <button className="add-cart-btn">Add to Cart</button>
+          <button className="add-cart-btn"  onClick={() => dispatch(addToCart(product))}>Add to Cart</button>
         </div>
       </div>
 
@@ -178,7 +182,7 @@ export const ProductDetails = () => {
                         <p>₹{products.finalPrice}
                           <span>₹{products.originalPrice}</span></p>
                       </div>
-                      <button>Add To Cart</button>
+                      <button onClick={() => dispatch(addToCart(product))}>Add To Cart</button>
                     </div>
                   ))}
 

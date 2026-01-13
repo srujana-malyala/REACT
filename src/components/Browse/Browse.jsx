@@ -8,186 +8,206 @@ import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { brandsMenu, categoryMenu, sortMenu } from "../Browse/filterBarData";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Cart/CartSlice";
+
+
+
+
+   
 
 export const Browse = () => {
+     const dispatch = useDispatch();
 
-  // 🔹 STATES
-  const [brands, setBrands] = useState(brandsMenu);
-  const [categories, setCategories] = useState(categoryMenu);
-  const [sortBy, setSortBy] = useState("");
-  const [price, setPrice] = useState(9990);
-
-  const navigate = useNavigate();
-
-  // 🔹 BRAND CHECKBOX
-  const handleBrandChange = (id) => {
-    setBrands((prev) =>
-      prev.map((brand) =>
-        brand.id === id
-          ? { ...brand, checked: !brand.checked }
-          : brand
-      )
+    // 🔹 STATES
+    const [brands, setBrands] = useState(brandsMenu);
+    const [categories, setCategories] = useState(categoryMenu);
+    const [sortBy, setSortBy] = useState("");
+    const MAX_PRICE = Math.max(
+        ...productsData.map((p) => p.finalPrice)
     );
-  };
 
-  // 🔹 CATEGORY CHECKBOX
-  const handleCategoryChange = (id) => {
-    setCategories((prev) =>
-      prev.map((cat) =>
-        cat.id === id
-          ? { ...cat, checked: !cat.checked }
-          : cat
-      )
+    const MIN_PRICE = Math.min(
+        ...productsData.map((p) => p.finalPrice)
     );
-  };
 
-  // 🔹 FILTERED BRANDS & CATEGORIES
-  const selectedBrands = brands
-    .filter((b) => b.checked)
-    .map((b) => b.label);
+    const [price, setPrice] = useState(MAX_PRICE);
+    const navigate = useNavigate();
 
-  const selectedCategories = categories
-    .filter((c) => c.checked)
-    .map((c) => c.label);
+    // 🔹 BRAND CHECKBOX
+    const handleBrandChange = (id) => {
+        setBrands((prev) =>
+            prev.map((brand) =>
+                brand.id === id
+                    ? { ...brand, checked: !brand.checked }
+                    : brand
+            )
+        );
+    };
 
-  // 🔹 FILTER + SORT LOGIC
-  let filteredProducts = productsData.filter((product) => {
-    const brandMatch =
-      selectedBrands.length === 0 ||
-      selectedBrands.includes(product.brand);
+    // 🔹 CATEGORY CHECKBOX
+    const handleCategoryChange = (id) => {
+        setCategories((prev) =>
+            prev.map((cat) =>
+                cat.id === id
+                    ? { ...cat, checked: !cat.checked }
+                    : cat
+            )
+        );
+    };
 
-    const categoryMatch =
-      selectedCategories.length === 0 ||
-      selectedCategories.includes(product.category);
+    // 🔹 FILTERED BRANDS & CATEGORIES
+    const selectedBrands = brands
+        .filter((b) => b.checked)
+        .map((b) => b.label);
 
-    const priceMatch = product.finalPrice <= price;
+    const selectedCategories = categories
+        .filter((c) => c.checked)
+        .map((c) => c.label);
 
-    return brandMatch && categoryMatch && priceMatch;
-  });
+    // 🔹 FILTER + SORT LOGIC
+    let filteredProducts = productsData.filter((product) => {
+        const brandMatch =
+            selectedBrands.length === 0 ||
+            selectedBrands.includes(product.brand);
 
-  if (sortBy === "Latest") {
-    filteredProducts = [...filteredProducts].reverse();
-  }
+        const categoryMatch =
+            selectedCategories.length === 0 ||
+            selectedCategories.includes(product.category);
 
-  if (sortBy === "Top Rated") {
-    filteredProducts = [...filteredProducts].sort(
-      (a, b) => b.rateCount - a.rateCount
-    );
-  }
+        const priceMatch = product.finalPrice <= price;
 
-  if (sortBy === "Price(Lowest First)") {
-    filteredProducts = [...filteredProducts].sort(
-      (a, b) => a.finalPrice - b.finalPrice
-    );
-  }
+        return brandMatch && categoryMatch && priceMatch;
+    });
 
-  if (sortBy === "Price(Highest First)") {
-    filteredProducts = [...filteredProducts].sort(
-      (a, b) => b.finalPrice - a.finalPrice
-    );
-  }
+    if (sortBy === "Latest") {
+        filteredProducts = [...filteredProducts].reverse();
+    }
 
-  // 🔹 NAVIGATE
-  const handleSelect = (id) => {
-    navigate(`/product/${id}`);
-  };
+    if (sortBy === "Top Rated") {
+        filteredProducts = [...filteredProducts].sort(
+            (a, b) => b.rateCount - a.rateCount
+        );
+    }
 
-  return (
-    <>
-      <Header />
+    if (sortBy === "Price(Lowest First)") {
+        filteredProducts = [...filteredProducts].sort(
+            (a, b) => a.finalPrice - b.finalPrice
+        );
+    }
 
-      <div className="cont">
+    if (sortBy === "Price(Highest First)") {
+        filteredProducts = [...filteredProducts].sort(
+            (a, b) => b.finalPrice - a.finalPrice
+        );
+    }
 
-        {/* ===== LEFT FILTER BAR ===== */}
-        <div className="sort">
+    // 🔹 NAVIGATE
+    const handleSelect = (id) => {
+        navigate(`/product/${id}`);
+    };
 
-          {/* SORT */}
-          <h3>Sort By</h3>
-          <div className="divider"></div>
-          {sortMenu.map((data) => (
-            <ul key={data.id}>
-              <li onClick={() => setSortBy(data.title)}>
-                {data.title}
-              </li>
-            </ul>
-          ))}
+    return (
+        <>
+            <Header />
 
-          {/* BRANDS */}
-          <h4>Brands</h4>
-          <div className="divider"></div>
-          {brands.map((brand) => (
-            <label key={brand.id} className="filter-item">
-              <input
-                type="checkbox"
-                checked={brand.checked}
-                onChange={() => handleBrandChange(brand.id)}
-              />
-              {brand.label}
-            </label>
-          ))}
+            <div className="cont">
 
-          {/* CATEGORY */}
-          <h3>Category</h3>
-          <div className="divider"></div>
-          {categories.map((cate) => (
-            <label key={cate.id} className="filter-item">
-              <input
-                type="checkbox"
-                checked={cate.checked}
-                onChange={() => handleCategoryChange(cate.id)}
-              />
-              {cate.label}
-            </label>
-          ))}
+                {/* ===== LEFT FILTER BAR ===== */}
+                <div className="sort">
 
-          {/* PRICE */}
-          <h4>Price</h4>
-          <input
-            type="range"
-            min={319}
-            max={9990}
-            value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
-            className="price-slider"
-          />
-          <p className="price-value">₹319 – ₹{price}</p>
+                    {/* SORT */}
+                    <h3>Sort By</h3>
+                    <div className="divider"></div>
+                    {sortMenu.map((data) => (
+                        <ul key={data.id}>
+                            <li onClick={() => setSortBy(data.title)}>
+                                {data.title}
+                            </li>
+                        </ul>
+                    ))}
 
-        </div>
+                    {/* BRANDS */}
+                    <h4>Brands</h4>
+                    <div className="divider"></div>
+                    {brands.map((brand) => (
+                        <label key={brand.id} className="filter-item">
+                            <input
+                                type="checkbox"
+                                checked={brand.checked}
+                                onChange={() => handleBrandChange(brand.id)}
+                            />
+                            {brand.label}
+                        </label>
+                    ))}
 
-        {/* ===== PRODUCTS ===== */}
-        <div className="container">
-          <div className="cards">
-            {filteredProducts.map((product) => (
-              <div className="card-link" key={product.id}>
-                <img
-                  src={product.images[0]}
-                  onClick={() => handleSelect(product.id)}
-                />
+                    {/* CATEGORY */}
+                    <h3>Category</h3>
+                    <div className="divider"></div>
+                    {categories.map((cate) => (
+                        <label key={cate.id} className="filter-item">
+                            <input
+                                type="checkbox"
+                                checked={cate.checked}
+                                onChange={() => handleCategoryChange(cate.id)}
+                            />
+                            {cate.label}
+                        </label>
+                    ))}
 
-                <div className="card-rate">
-                  <Ratecount rateCount={product.rateCount}/>
+                    {/* PRICE */}
+                    <h4>Price</h4>
+                    <input
+                        type="range"
+                        min={MIN_PRICE}
+                        max={MAX_PRICE}
+                        value={price}
+                        onChange={(e) => setPrice(Number(e.target.value))}
+                        className="price-slider"
+                    />
+
+                    <p className="price-value">₹319 – ₹{price}</p>
+
+
                 </div>
 
-                <h1 className="card-title">{product.title}</h1>
-                <p>{product.info}</p>
+                {/* ===== PRODUCTS ===== */}
+                <div className="container">
+                    <div className="cards">
+                        {filteredProducts.map((product) => (
+                            <div className="card-link" key={product.id}>
+                                <img
+                                    src={product.images[0]}
+                                    onClick={() => handleSelect(product.id)}
+                                />
 
-                <div className="divider"></div>
+                                <div className="card-rate">
+                                    <Ratecount rateCount={product.rateCount} />
+                                </div>
 
-                <div className="prices">
-                  ₹{product.finalPrice}
-                  <span>₹{product.originalPrice}</span>
+                                <h1 className="card-title">{product.title}</h1>
+                                <p>{product.info}</p>
+
+                                <div className="divider"></div>
+
+                                <div className="prices">
+                                    ₹{product.finalPrice}
+                                    <span>₹{product.originalPrice}</span>
+                                </div>
+
+                                <button className="add-btn" onClick={(e) => {
+                                    console.log("ADDING:", product.id);//IMPORTANT
+                                    dispatch(addToCart(product));
+                                }}>Add To Cart</button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                <button>Add To Cart</button>
-              </div>
-            ))}
-          </div>
-        </div>
+            </div>
 
-      </div>
-
-      <Service />
-      <Footer />
-    </>
-  );
+            <Service />
+            <Footer />
+        </>
+    );
 };
