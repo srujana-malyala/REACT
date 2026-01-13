@@ -3,12 +3,14 @@ import productsData from "../Products/productsData";
 import "./FeaturedProducts.css"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate, Link } from "react-router-dom";
 //import images from"../public/products/Images"
 
 export const FeaturedProducts = () => {
     const filteredProduct = productsData.filter(
         (product) => product.tag === "featured-product"
     );
+    
 const settings = {
   dots: true,
   arrows: false,
@@ -26,6 +28,12 @@ const settings = {
   autoplaySpeed: 3000,
 
 };
+//CLICK ON IMAGE TO DIRECT TO PRODUCTS PAGE
+ const navigate = useNavigate();
+    
+      const handleSelect = (id) => {
+        navigate(`/product/${id}`);
+      };
 
 
     return (
@@ -41,7 +49,7 @@ const settings = {
                             <div className="card">
                                 <p>{item.title}</p>
 
-                                <img src={item.images[0]} alt={item.title} />
+                                <img src={item.images[0]} alt={item.title}  onClick={() => handleSelect(item.id)} />
                                 
                                 <p className="price">
                                     ₹{item.finalPrice.toLocaleString()}

@@ -3,6 +3,7 @@
 import Slider from "react-slick";
 import productsData from "../Products/productsData";
 import "./Banner.css";
+import { useNavigate, Link } from "react-router-dom";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,6 +12,8 @@ import "slick-carousel/slick/slick-theme.css";
   const heroProducts = productsData.filter(
     (product) => product.tag === "hero-product"
   );
+
+   const navigate = useNavigate();
 
   const settings = {
     dots: true,
@@ -21,6 +24,10 @@ import "slick-carousel/slick/slick-theme.css";
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3500,
+  };
+
+  const handleSelect = (id) => {
+    navigate(`/product/${id}`);
   };
 
   return (
@@ -45,7 +52,7 @@ import "slick-carousel/slick/slick-theme.css";
                 <span>₹{item.originalPrice.toLocaleString()}</span>
               </p>
 
-              <button>Shop Now</button>
+              <button  onClick={() => handleSelect(item.id)} >Shop Now</button>
             </div>
 
             {/* RIGHT */}
