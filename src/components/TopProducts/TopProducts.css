@@ -1,7 +1,7 @@
 
 .top{
      background: #111;
- height: 1700px;
+height:fit-content;
  width: 1500px;
   color: #ccc;
 }
@@ -53,6 +53,7 @@
 .container {
   width: 1300px;
   height: 2500px;
+   object-fit: cover;
   margin:30px;
   padding: 40px 60px; 
   background-color: #0f0f0f;

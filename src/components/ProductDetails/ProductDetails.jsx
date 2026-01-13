@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import productsData from "../Products/productsData";
 import { useState } from "react";
+import { Link } from "react-router-dom"
 import "./ProductDetails.css";
 import { Ratecount } from "../ProductDetails/Ratecount";
 import { Footer } from "../Footer/Footer";
@@ -15,6 +16,12 @@ export const ProductDetails = () => {
   const { id } = useParams();
   const product = productsData.find(
     (item) => item.id === Number(id)
+  );
+
+  const relatedProducts = productsData.filter(
+    (item) =>
+      item.category === product.category &&
+      item.id !== product.id
   );
 
   const [activeImg, setActiveImg] = useState(
@@ -105,31 +112,31 @@ export const ProductDetails = () => {
         </ul>
 
         {/* //specifications */}
-         {activeTab === "specifications" && (
+        {activeTab === "specifications" && (
           <div className="spec">
             <ul>
-              <li>Brand  <b style={{marginLeft:"350px"}}>{product.brand}</b></li>
-              <li>Model <b style={{marginLeft:"260px"}}> {product.title}</b> </li>
-               <li>GeniricName <b style={{marginLeft:"340px"}}> {product.category}</b> </li>
-              <li>Headphone Type  <b style={{marginLeft:"370px"}}>{product.type}</b></li>
-              <li>Connectivity <b style={{marginLeft:"360px"}}>{product.connectivity}</b></li>
-               <li>Microphone <b style={{marginLeft:"390px"}}> Yes</b> </li>
+              <li>Brand  <b style={{ marginLeft: "350px" }}>{product.brand}</b></li>
+              <li>Model <b style={{ marginLeft: "260px" }}> {product.title}</b> </li>
+              <li>GeniricName <b style={{ marginLeft: "340px" }}> {product.category}</b> </li>
+              <li>Headphone Type  <b style={{ marginLeft: "370px" }}>{product.type}</b></li>
+              <li>Connectivity <b style={{ marginLeft: "360px" }}>{product.connectivity}</b></li>
+              <li>Microphone <b style={{ marginLeft: "390px" }}> Yes</b> </li>
             </ul>
           </div>
         )}
 
-         {activeTab === "overview" && (
+        {activeTab === "overview" && (
           <div className="over">
-            <p>The  <b style={{color:"orangered",fontSize:"20px",fontWeight:"600px",}}>{product.title}</b> <b style={{fontSize:"18px",fontWeight:"600px"}}>{product.info}</b> provides   with  fabulous  sound  quality</p>
+            <p>The  <b style={{ color: "orangered", fontSize: "20px", fontWeight: "600px", }}>{product.title}</b> <b style={{ fontSize: "18px", fontWeight: "600px" }}>{product.info}</b> provides   with  fabulous  sound  quality</p>
             <div>
               <ul>
                 <li>Sound Tuned to perfection</li>
-                 <li>Comfortable to Wear</li>
-                  <li>Long Hours Playback Time</li>
+                <li>Comfortable to Wear</li>
+                <li>Long Hours Playback Time</li>
               </ul>
-              </div>
-              <p>Buy the <b>{product.title}</b> <b>{product.info}</b> which offers you with fabulous music experience by providing you with awesome sound quality that you can never
-              move on from.Enjoy perfect flexibility and mobility with amazing musical quality with these Headphones giving you a very awesome audio experience. It blends with exceptional 
+            </div>
+            <p>Buy the <b>{product.title}</b> <b>{product.info}</b> which offers you with fabulous music experience by providing you with awesome sound quality that you can never
+              move on from.Enjoy perfect flexibility and mobility with amazing musical quality with these Headphones giving you a very awesome audio experience. It blends with exceptional
               sound quality and a range of smart features for an unrivalled listening experience.  </p>
           </div>
         )}
@@ -152,9 +159,41 @@ export const ProductDetails = () => {
         )}
       </div>
 
-      <div>
+      <div className="related">
         <h1>Related Products</h1>
-        
+        <div className="related-products">
+            <>
+              <div className="container">
+                <div className="cards">
+                  {relatedProducts.map((products) => (
+                    <div className="card-link" key={products.id}>
+                      <img src={products.images[0]} onClick={() => handleSelect(products.id)} />
+                      {/* <div className="card-rate"><  MdOutlineStar/>{products.rateCount}</div> */}
+                      <Ratecount rateCount={products.rateCount} />
+
+                      <h1 className="card-title">{products.title}</h1>
+                      <p>{products.info}</p>
+                      <div className="divider"></div>
+                      <div className="prices">
+                        <p>₹{products.finalPrice}
+                          <span>₹{products.originalPrice}</span></p>
+                      </div>
+                      <button>Add To Cart</button>
+                    </div>
+                  ))}
+
+                  <Link to="/products" className="card-link browse-card">
+                    <span>
+                      Browse All<br />Products →
+                    </span>
+                  </Link>
+
+                </div>
+              </div>
+            </>
+          
+        </div>
+
       </div>
 
 

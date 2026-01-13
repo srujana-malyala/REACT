@@ -1,6 +1,40 @@
+.cont{
+  display: flex;
+}
+
+.sort li{
+ list-style: none;
+ cursor: pointer;
+}
+
+.filters {
+  width: 220px;
+  background: #0f0f0f;
+  color: #fff;
+  padding: 15px;
+}
+
+.filters h4 {
+  margin-bottom: 10px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.filter-item input {
+  accent-color: #ff3c00;
+}
+
+
 .container {
   width: 1300px;
-  height: 2500px;
+  height:fit-content;
   margin:30px;
   padding: 40px 60px; 
   background-color: #0f0f0f;

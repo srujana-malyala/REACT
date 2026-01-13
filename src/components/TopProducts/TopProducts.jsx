@@ -10,7 +10,7 @@ import { Ratecount } from "../ProductDetails/Ratecount";
 export const TopProducts = () => {
 
 
-    const [activeCategory, setActiveCategory] = useState(""); 
+    const [activeCategory, setActiveCategory] = useState("all"); 
 
   // 🔹 FILTER 
   const filteredProducts = () => {
